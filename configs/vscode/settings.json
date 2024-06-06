@@ -1,0 +1,113 @@
+{
+  // Algunas de las opciones son de midudev: https://twitter.com/midudev/status/1768283202118967778
+  // Las extensiones instaladas son:
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.vscode-dotnet-runtime
+  //  - https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=myaaghubi.auto-semicolon-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit
+  //  - https://marketplace.visualstudio.com/items?itemName=csharpier.csharpier-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-mssql.data-workspace-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+  //  - https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+  //  - https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+  //  - https://marketplace.visualstudio.com/items?itemName=rodrigocfd.format-comment
+  //  - https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub
+  //  - https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css
+  //  - https://marketplace.visualstudio.com/items?itemName=HTMLHint.vscode-htmlhint
+  //  - https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.vscodeintellicode-csharp
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server
+  //  - https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
+  //  - https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
+  //  - https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme
+  //  - https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=yoavbls.pretty-ts-errors
+  //  - https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-repositories
+  //  - https://marketplace.visualstudio.com/items?itemName=darian-benam.vscode-robots-dot-txt-support
+  //  - https://marketplace.visualstudio.com/items?itemName=josefpihrt-vscode.roslynator
+  //  - https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-bindings-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-database-projects-vscode
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql
+  //  - https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+  //  - https://marketplace.visualstudio.com/items?itemName=meganrogge.template-string-converter
+  //  - https://marketplace.visualstudio.com/items?itemName=andi1984.tinypng
+  //  - https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
+  //  - https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens
+
+  // Deshabilita el formateado al guardar de forma global.
+  "editor.formatOnSave": false,
+  // Formatea al guardar con CSharpier.
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode",
+    "editor.formatOnSave": true
+  },
+  // Formatea al guardar con Prettier.
+  "[javascript][javascriptreact][typescript][typescriptreact][html][css][markdown][json][jsonc][yaml][graphql]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Habilita Emmet en otros lenguajes.
+  "emmet.includeLanguages": {
+    "razor": "html"
+  },
+
+  // Añade una línea nueva al final del fichero al guardar.
+  "files.insertFinalNewline": true,
+  // Añade una línea nueva al final del cuaderno al guardar.
+  "notebook.insertFinalNewline": true,
+  // Elimina las líneas sobrantes al final del fichero.
+  "files.trimFinalNewlines": true,
+
+  // Habilita la fuenta Powerlevel10K Meslo Nerd Font en la terminal.
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+
+  // Usa un bloque como estilo del cursor.
+  "editor.cursorStyle": "block",
+  // Hace la animación del cursor sólida: no hay animación.
+  "editor.cursorBlinking": "solid",
+
+  // Usa directamente la API de TinyPNG en VSCode. Gratis: 500 imágenes/mes.
+  "tinypng.apiKey": "bwfFWhQShWW1y1rh4qDsQQBT6hyNVDfg",
+  // Sobreescribe los ficheros comprimidos.
+  "tinypng.forceOverwrite": true,
+
+  // Mueve la Primary Side Bar a la derecha.
+  "workbench.sideBar.location": "right",
+  // Habilita el tema de iconos Material Icon Theme.
+  "workbench.iconTheme": "material-icon-theme",
+  // Mueve la Activity Bar a la zona superior de la
+  // Primary Side Bar.
+  "workbench.activityBar.location": "top",
+  // Fija los ficheros o directorios mientras se hace scroll.
+  "workbench.tree.enableStickyScroll": true,
+
+  // Usa Web Worker para la tokenización. Mejora el rendimiento.
+  "editor.experimental.asyncTokenization": true,
+  // Dibuja una línea de colores entre llaves de código.
+  "editor.guides.bracketPairs": true,
+  // Muestra la localización del par de paréntesis en las que se encuentra
+  // el cursor.
+  "editor.guides.highlightActiveBracketPair": true,
+  // Usa un color diferente por cada línea entre paréntesis.
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  // Fija en el scroll la función o clase que está en edición.
+  "editor.stickyScroll.enabled": true,
+
+  // Actualiza la ruta de los imports al mover el fichero en JavaScript.
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  // Deshabilita la creación automática de una solución en .NET.
+  "dotnet.automaticallyCreateSolutionInWorkspace": false
+}
