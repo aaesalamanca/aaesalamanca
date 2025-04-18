@@ -4,4 +4,4 @@ Desarrollo _backends_ "aburridos"[^1] y herramientas de consola para compañías
 
 Aunque a lo largo de mis cinco años de experiencia he trabajado, principalmente, con .NET Framework, .NET Core y .NET, también tengo conocimientos
 
-[^1] [Choose Boring Technology - Elige tecnología aburrida](https://mcfunley.com/choose-boring-technology)
+[^1]: [Choose Boring Technology - Elige tecnología aburrida](https://mcfunley.com/choose-boring-technology)
