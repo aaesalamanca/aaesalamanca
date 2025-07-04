@@ -8,9 +8,8 @@ Con más de cinco años de experiencia, mi día a día gira principalmente en to
 
 Actualmente, estoy enfocado en tres frentes:
 
-1. 🚀 **Conquistando el _frontend_:** Dedico esfuerzo y cariño a mejorar mis habilidades con **HTML**, **CSS** y **JavaScript**. ¡Quiero moverme como pez en el agua en el lado del cliente! Y nada mejor para ello que los bloques fundacionales de la _web_[^2].
+1. 🚀 **Conquistando el _frontend_:** Dedico esfuerzo y cariño a mejorar mis habilidades con **HTML**, **CSS** y **JavaScript**. ¡Quiero moverme como pez en el agua en el lado del cliente! Y nada mejor para ello que los bloques fundacionales de la _web_[^2]. También me estoy sumergiendo en el ecosistema moderno con **TypeScript**, **React** y **Astro** para construir interfaces más dinámicas y eficientes.
 2. 🛠️ **Profundizando en el _backend_:** En mis ratos libres, me encontrarás "cacharreando" y explorando las maravillas de **Go** a la par que me mantengo al día con las novedades de .NET y C#.
-3. 📱 **Aprendiendo desarrollo nativo con Swift:** Recientemente me llamó la atención el desarrollo de aplicaciones nativas para **iOS** y **macOS**. Si no estoy con Go ni C#, ando ejecutando **Xcode**. Por suerte, todavía no _crashea_ cada dos por tres al compilar **Swift**, SwiftUI, UIKit y AppKit. 😅
 
 Si quieres hablar conmigo, puedes encontrarme en:
 
@@ -24,10 +23,12 @@ Si quieres hablar conmigo, puedes encontrarme en:
 ![.NET Core Badge](https://img.shields.io/badge/.NET_Core-%23512BD4?logo=dotnet)
 ![.NET Framework Badge](https://img.shields.io/badge/.NET_Framework-%23512BD4?logo=dotnet)
 ![JavaScript Badge](https://img.shields.io/badge/JavaScript-%23F7DF1E?logo=javascript&logoColor=white)
+![TypeScript Badge](https://img.shields.io/badge/TypeScript-%233178C6?logo=typescript&logoColor=white)
 ![HTML Badge](https://img.shields.io/badge/HTML-%23E34F26?logo=html5&logoColor=white)
 ![CSS Badge](https://img.shields.io/badge/CSS-%23663399?logo=css)
+![React Badge](https://img.shields.io/badge/React-%2361DAFB?logo=react&logoColor=white)
+![Astro Badge](https://img.shields.io/badge/Astro-%23BC52EE?logo=astro&logoColor=white)
 ![Go Badge](https://img.shields.io/badge/Go-%2300ADD8?logo=go&logoColor=white)
-![Swift Badge](https://img.shields.io/badge/Swift-%23F05138?logo=swift&logoColor=white)
 ![SQLite Badge](https://img.shields.io/badge/SQLite-%23003B57?logo=sqlite)
 ![MySQL Badge](https://img.shields.io/badge/MySQL-%234479A1?logo=mysql&logoColor=white)
 ![PostgreSQL Badge](https://img.shields.io/badge/PostgreSQL-%234169E1?logo=postgresql&logoColor=white)
