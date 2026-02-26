@@ -19,8 +19,8 @@
 //
 // - `Color.Yellow` for separators.
 // - `Color.DeepPink` for `.sln` files.
-// - `Color.Green` for StandardOutput stream.
-// - `Color.Red` for StandardError stream.
+// - `Color.Green` for StandardOutput stream and updated repositories.
+// - `Color.Red` for StandardError stream and restored repositores.
 //
 // Colorful.Console reference:
 //
@@ -37,10 +37,18 @@ const string ParentDirectory = "/Users/alejandroantonioestornellsalamanca/Develo
 const string MainBranch = "main";
 const string BuildBranch = "build/update-csharpier-format";
 
+var watch = new Stopwatch();
+watch.Start();
+
 Directory.SetCurrentDirectory(ParentDirectory);
+
+var updatedRepositories = new List<string>();
+var restoredRepositories = new List<string>();
 
 foreach (var directory in Directory.EnumerateDirectories("."))
 {
+    var trimmedDirectory = directory.Replace("./", "");
+
     var slnFiles = Directory.GetFiles(directory, "*.sln");
     var isSlnFile = slnFiles.Length > 0;
     if (!isSlnFile)
@@ -48,18 +56,28 @@ foreach (var directory in Directory.EnumerateDirectories("."))
         continue;
     }
 
-    // Enter the .NET directory.
     Directory.SetCurrentDirectory(directory);
 
     DrawStart(slnFiles[0]);
 
+    // Fetch the latest changes on main.
+    // git usually reports its progress to the standard output and error streams.
+    // That's why, for now, the standard output and error streams are checked.
+    //
+    // - https://git-scm.com/docs/git-switch#Documentation/git-switch.txt---progress
+    // - https://git-scm.com/docs/git-push#Documentation/git-push.txt---progress
+    var (output, error) = ExecuteProcess("git", "switch main");
+    DrawCommand("git switch main", output, error);
+    (output, error) = ExecuteProcess("git", "pull");
+    DrawCommand("git pull", output, error);
+
     // Create `dotnet-tool.json` if it doesn't exist and install CSharpier.
     // Update CSharpier if it is already installed.
-    var (output, error) = ExecuteProcess("dotnet", "tool install csharpier");
+    (output, error) = ExecuteProcess("dotnet", "tool install csharpier");
     DrawCommand("dotnet tool install csharpier", output, error);
     if (!string.IsNullOrWhiteSpace(error))
     {
-        RestoreRepository();
+        RestoreRepository(restoredRepositories, trimmedDirectory);
         continue;
     }
 
@@ -72,7 +90,7 @@ foreach (var directory in Directory.EnumerateDirectories("."))
     DrawCommand("git status -s", output, error);
     if (string.IsNullOrWhiteSpace(output) || !string.IsNullOrWhiteSpace(error))
     {
-        RestoreRepository();
+        RestoreRepository(restoredRepositories, trimmedDirectory);
         continue;
     }
 
@@ -82,16 +100,9 @@ foreach (var directory in Directory.EnumerateDirectories("."))
     DrawCommand("dotnet test", output, error);
     if (!string.IsNullOrWhiteSpace(error))
     {
-        RestoreRepository();
+        RestoreRepository(restoredRepositories, trimmedDirectory);
         continue;
     }
-
-    // `git switch` and `git push`  report their progress to the
-    // standard error stream. That's why, for now, the standard output
-    // and error streams are not used.
-    //
-    // - https://git-scm.com/docs/git-switch#Documentation/git-switch.txt---progress
-    // - https://git-scm.com/docs/git-push#Documentation/git-push.txt---progress
 
     // Create branch `build/update-csharpier-format`.
     (output, error) = ExecuteProcess("git", $"switch -c {BuildBranch}");
@@ -107,12 +118,17 @@ foreach (var directory in Directory.EnumerateDirectories("."))
     (output, error) = ExecuteProcess("git", $"push -u origin {BuildBranch}");
     DrawCommand($"git push -u origin {BuildBranch}", output, error);
 
+    updatedRepositories.Add(trimmedDirectory);
+
     DrawSeparator();
 
     Directory.SetCurrentDirectory(ParentDirectory);
 }
 
-DrawSummary();
+watch.Stop();
+var elapsed = watch.Elapsed;
+
+DrawSummary(updatedRepositories, restoredRepositories, elapsed);
 
 static void DrawSeparator() => Console.WriteLine("-------", Color.Yellow);
 
@@ -175,13 +191,15 @@ static void DrawCommand(string command, string output, string error)
     Console.WriteLine($"Error: {error}", Color.Red);
 }
 
-// Restore the repository status if there's an error in the
-// previous step.
-static void RestoreRepository()
+// Restore the repository status.
+static void RestoreRepository(List<string> restoredRepositories, string trimmedDirectory)
 {
     _ = ExecuteProcess("git", $"switch {MainBranch}");
     _ = ExecuteProcess("git", $"branch -D {BuildBranch}");
     _ = ExecuteProcess("git", "restore ./");
+
+    restoredRepositories.Add(trimmedDirectory);
+
     Console.WriteLine("Restoring repository...");
     DrawSeparator();
 
@@ -189,7 +207,31 @@ static void RestoreRepository()
 }
 
 // Print to the console a summary of the executed changes.
-static void DrawSummary()
+static void DrawSummary(
+    List<string> updatedRepositories,
+    List<string> restoredRepositories,
+    TimeSpan elapsed
+)
 {
-    
+    DrawSeparator();
+    Console.WriteLine("Summary");
+
+    Console.WriteLine($"\tUpdated repositories (total: {updatedRepositories.Count}):", Color.Green);
+    foreach (var repository in updatedRepositories)
+    {
+        Console.WriteLine($"\t\t{repository}");
+    }
+
+    Console.WriteLine(
+        $"\tRestored repositories (total: {restoredRepositories.Count} ):",
+        Color.Red
+    );
+    foreach (var repository in restoredRepositories)
+    {
+        Console.WriteLine($"\t\t{repository}");
+    }
+
+    Console.WriteLine($"Time spent: {elapsed:mm} minutes - {elapsed:ss} seconds");
+
+    DrawSeparator();
 }
