@@ -42,8 +42,9 @@ watch.Start();
 
 Directory.SetCurrentDirectory(ParentDirectory);
 
-var updatedRepositories = new List<string>();
-var restoredRepositories = new List<string>();
+// Preallocate lists.
+var updatedRepositories = new List<string>(32);
+var restoredRepositories = new List<string>(32);
 
 foreach (var directory in Directory.EnumerateDirectories("."))
 {
@@ -126,7 +127,7 @@ foreach (var directory in Directory.EnumerateDirectories("."))
 }
 
 watch.Stop();
-var elapsed = watch.Elapsed;
+var elapsed = watch.ElapsedMilliseconds;
 
 DrawSummary(updatedRepositories, restoredRepositories, elapsed);
 
@@ -152,7 +153,7 @@ static (string output, string error) ExecuteProcess(string fileName, string argu
         UseShellExecute = false,
         CreateNoWindow = true,
     };
-    var process = new Process { StartInfo = startInfo };
+    using var process = new Process { StartInfo = startInfo };
     var error = new StringBuilder();
     process.ErrorDataReceived += (sender, e) => error.Append(e.Data);
 
@@ -210,7 +211,7 @@ static void RestoreRepository(List<string> restoredRepositories, string trimmedD
 static void DrawSummary(
     List<string> updatedRepositories,
     List<string> restoredRepositories,
-    TimeSpan elapsed
+    long elapsed
 )
 {
     DrawSeparator();
@@ -223,7 +224,7 @@ static void DrawSummary(
     }
 
     Console.WriteLine(
-        $"\tRestored repositories (total: {restoredRepositories.Count} ):",
+        $"\tRestored repositories (total: {restoredRepositories.Count}):",
         Color.Red
     );
     foreach (var repository in restoredRepositories)
@@ -231,7 +232,7 @@ static void DrawSummary(
         Console.WriteLine($"\t\t{repository}");
     }
 
-    Console.WriteLine($"Time spent: {elapsed:mm} minutes - {elapsed:ss} seconds");
+    Console.WriteLine($"Total Time: {elapsed} ms");
 
     DrawSeparator();
 }
