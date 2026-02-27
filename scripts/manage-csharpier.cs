@@ -153,7 +153,7 @@ static (string output, string error) ExecuteProcess(string fileName, string argu
         UseShellExecute = false,
         CreateNoWindow = true,
     };
-    var process = new Process { StartInfo = startInfo };
+    using var process = new Process { StartInfo = startInfo };
     var error = new StringBuilder();
     process.ErrorDataReceived += (sender, e) => error.Append(e.Data);
 
@@ -224,7 +224,7 @@ static void DrawSummary(
     }
 
     Console.WriteLine(
-        $"\tRestored repositories (total: {restoredRepositories.Count} ):",
+        $"\tRestored repositories (total: {restoredRepositories.Count}):",
         Color.Red
     );
     foreach (var repository in restoredRepositories)
